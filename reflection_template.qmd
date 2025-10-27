@@ -37,8 +37,6 @@ surveys <- read_csv("data/surveys.csv")
 #| label: wd-1-csv-2
 # Lab 3 Q2
 
-# one edit: Use read_csv explicitly so this chunk proves "import" without relying on library(tidyverse) being already attached
-
 library(here)
 teacher_evals <- read_csv(here("downloads/data/teacher_evals.csv"))
 ```
@@ -85,6 +83,18 @@ witness_interviews <- interview |>
 
 ```{r}
 #| label: wd-2-ex-3
+
+  plot_data <- ca_childcare |>
+  select(
+    region, 
+    study_year, 
+    starts_with("mc_") #Added starts_with
+  ) |>
+  pivot_longer(
+    cols      = starts_with("mc_"),
+    names_to  = "age_group",
+    values_to = "price_weekly"
+  )
 
 ```
 
@@ -260,6 +270,14 @@ plot_data <- ca_childcare |>
 ```{r}
 #| label: wd-4-string
 
+witness2 <- person |>
+  filter(
+    address_street_name == "Franklin Ave",
+    str_detect(name, "^Ann")
+  ) |>
+  mutate(
+    name_clean = str_to_title(name)
+  )
 ```
 
 -   Date (example must use functions from **lubridate**)
@@ -267,6 +285,13 @@ plot_data <- ca_childcare |>
 ```{r}
 #| label: wd-4-date
 
+checkins_0109 <- get_fit_now_check_in |>
+  mutate(
+    membership_id = as.character(membership_id),
+    check_in_date = ymd(as.character(check_in_date)),
+    check_in_month = month(check_in_date, label = TRUE)
+  ) |>
+  filter(check_in_date == ymd("2018-01-09"))
 ```
 
 **WD-5: I can use mutating joins to combine multiple dataframes.**
@@ -311,7 +336,7 @@ tax_enriched <- tax_rev |>
 # Lab 4 · Q2
 ca_childcare <- counties |>
   filter(state_abbreviation == "CA") |>
-  inner_join(                             # EDIT: qualify to emphasize dplyr join
+  inner_join(
     childcare_costs |>
       filter(study_year >= 2008, study_year <= 2018),
     by = "county_fips_code"
@@ -324,7 +349,7 @@ ca_childcare <- counties |>
 #| label: wd-5-left-ex-1
 # Lab 4 · Q3
 ca_childcare <- ca_childcare |>
-  left_join(                              # EDIT: qualify to emphasize dplyr join
+  left_join(
     tax_rev |>
       rename(
         county_name = entity_name,
@@ -340,14 +365,28 @@ ca_childcare <- ca_childcare |>
 
 ```{r}
 #| label: wd-6-semi
+#LAB 5
 
+gym_members_checked_in <- get_fit_now_member |>
+  semi_join(
+    get_fit_now_check_in |> 
+      filter(check_in_date == 20180109),
+    by = c("id" = "membership_id")
+  )
 ```
 
 -   `anti_join()`
 
 ```{r}
 #| label: wd-6-anti
+#LAB 5
 
+gym_members_not_checked_in <- get_fit_now_member |>
+  anti_join(
+    get_fit_now_check_in |> 
+      filter(check_in_date == 20180109),
+    by = c("id" = "membership_id")
+  )
 ```
 
 **WD-7: I can pivot dataframes from long to wide and visa versa**
@@ -360,7 +399,7 @@ ca_childcare <- ca_childcare |>
 # Lab 4 Q7
 plot_data <- ca_childcare |>
   select(region, study_year, mc_infant, mc_toddler, mc_preschool) |>
-  pivot_longer(                             # EDIT: qualify to foreground tidyr pivot
+  pivot_longer(
     cols      = c(mc_infant, mc_toddler, mc_preschool),
     names_to  = "age_group",
     values_to = "price_weekly"
@@ -380,7 +419,7 @@ mhi_by_region <- ca_childcare |>
     median_mhi_2018 = median(mhi_2018, na.rm = TRUE),
     .groups         = "drop"
   ) |>
-  pivot_wider(                              # EDIT: qualify to foreground tidyr pivot
+  pivot_wider(
     names_from  = study_year,
     values_from = median_mhi_2018,
     names_sort  = TRUE
@@ -478,8 +517,8 @@ glimpse(teacher_evals_clean
 library(tidyverse)
 
 ggplot(surveys, aes(x = weight, y = hindfoot_length)) +
-  geom_point(alpha = 0.3) +                 # reduces overplotting (clarity)
-  facet_wrap(~ species) +                   # many smalls; numeric × numeric across groups
+  geom_point(alpha = 0.3) + 
+  facet_wrap(~ species) + 
   labs(
     title    = "Relationship Between Weight and Hindfoot Length by Species",
     subtitle = "Hindfoot Length (mm)",
@@ -577,13 +616,13 @@ ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
 # Lab 2 · Q10–15
 ggplot(surveys, aes(x = species, y = weight)) +
   geom_boxplot(outlier.shape = NA) +
-  geom_jitter(alpha = 0.4) +                      # improves visibility of points
+  geom_jitter(alpha = 0.4) +
   labs(
     x     = "Species",
     y     = "Weight (grams)",
     title = "Rodent Weights by Species"
   ) +
-  theme(axis.text.x = element_text(angle = 45))   # improves label readability
+  theme(axis.text.x = element_text(angle = 45))
 ```
 
 -   I can modify my plot titles to clearly communicate the data context
@@ -643,7 +682,7 @@ plot.title = element_text(hjust = 0.5, face = "bold")
 #| label: dvs-3-1-ex-1
 # Lab 3 · Challenge 2
 ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
-  geom_bar(position = "fill") +                     # compositional view
+  geom_bar(position = "fill") + 
   scale_fill_manual(values = c("excellent" = "#9834eb", "standard" = "#d46c22")) +
   labs(title = "Evaluation of Teachers' Use of Activities") +
   theme_minimal()
@@ -776,7 +815,11 @@ region_income_min_2018
 ```{r}
 #| label: dvs-6-ex-1
 # Lab 4 · Q5
-mhi_by_region
+mhi_by_region |>
+  rename(
+    mhi_2008 = `2008`,
+    mhi_2018 = `2018`
+  )
 ```
 
 -   I can modify the text in my table to be more readable (e.g., bold face for column headers)
@@ -784,9 +827,11 @@ mhi_by_region
 ```{r}
 #| label: dvs-6-ex-2
 # Lab 3 Q7
+
 teacher_evals_clean |>
   distinct(teacher_id, academic_degree) |>
-  count(academic_degree, name = "n_instructors")
+  count(academic_degree, name = "Number_of_Instructors") |>
+  arrange(desc(Number_of_Instructors))
 ```
 
 -   I can arrange my table to have an intuitive ordering
@@ -794,6 +839,8 @@ teacher_evals_clean |>
 ```{r}
 #| label: dvs-6-ex-3
 
+mhi_by_region |>
+  arrange(desc(`2018`))
 ```
 
 **DVS-7: I show creativity in my tables.**
