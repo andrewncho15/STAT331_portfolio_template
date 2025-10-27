@@ -73,7 +73,7 @@ glimpse(teacher_evals_clean)
 ```{r}
 #| label: wd-2-ex-2
 
-#Lab 5
+#Lab 5, witness interviews
 witness_interviews <- interview |>
   inner_join(witnesses, by = c("person_id" = "id")) |>
   select(name, transcript)
@@ -84,6 +84,7 @@ witness_interviews <- interview |>
 ```{r}
 #| label: wd-2-ex-3
 
+#Lab 4 Q7
   plot_data <- ca_childcare |>
   select(
     region, 
@@ -121,6 +122,8 @@ teacher_evals_clean <- teacher_evals |>
 ```{r}
 #| label: wd-3-numeric-ex-2
 
+#LAB 3 Q11
+
 yr1_by_course <- teacher_evals_clean |>
   filter(seniority == 1)
 ```
@@ -130,7 +133,7 @@ yr1_by_course <- teacher_evals_clean |>
 ```{r}
 #| label: wd-3-character
 
-#Lab 5
+#Lab 5, witness on franklin
 witness2 <- person |>
 filter(address_street_name == "Franklin Ave",
 str_detect(name, "^Ann"))
@@ -141,7 +144,7 @@ str_detect(name, "^Ann"))
 ```{r}
 #| label: wd-3-string
 
-#Lab 5
+#Lab 5, members starting with '48Z'
 members_48Z <- get_fit_now_member |>
 mutate(id = as.character(id)) |>
 filter(str_starts(id, "48Z"))
@@ -151,12 +154,13 @@ filter(str_starts(id, "48Z"))
 
 ```{r}
 #| label: wd-3-date
-library(lubridate)
+
+#Lab 5, convert to date and filter jan 9, 2018
 
 checkins_0109 <- get_fit_now_check_in |>
   mutate(
     membership_id = as.character(membership_id),
-    # EDIT: Treat check_in_date as an actual Date (original data coded as int yyyymmdd).
+    # EDIT: Treat check_in_date as date
     check_in_date = ymd(as.character(check_in_date))
   ) |>
   filter(check_in_date == ymd("2018-01-09"))
@@ -169,7 +173,7 @@ checkins_0109 <- get_fit_now_check_in |>
 ```{r}
 #| label: wd-4-numeric-ex-1
 
-# Lab 3 Q11 — create a new numeric summary column
+# Lab 3 Q11
 yr1_by_course <- teacher_evals_clean |>
   filter(seniority == 1) |>
   group_by(teacher_id, course_id) |>
@@ -184,7 +188,7 @@ yr1_by_course <- teacher_evals_clean |>
 ```{r}
 #| label: wd-4-numeric-ex-2
 
-#Lab 5
+#Lab 5, check in date as int
 checkins_0109 <- get_fit_now_check_in |>
 mutate(
 membership_id = as.character(membership_id),
@@ -271,6 +275,8 @@ plot_data <- ca_childcare |>
 ```{r}
 #| label: wd-4-string
 
+#LAB 5, clean witness name
+
 witness2 <- person |>
   filter(
     address_street_name == "Franklin Ave",
@@ -285,6 +291,8 @@ witness2 <- person |>
 
 ```{r}
 #| label: wd-4-date
+
+#Lab 5, add month() with lubridate
 
 checkins_0109 <- get_fit_now_check_in |>
   mutate(
@@ -317,7 +325,7 @@ by = c("county_name", "study_year")
 ```{r}
 #| label: wd-5-right-ex-1
 
-# Lab 4 data — demonstrate a right_join using the same sources
+# Lab 4 right join on ta and childcare
 tax_enriched <- tax_rev |>
   rename(county_name = entity_name, study_year = year) |>
   right_join(ca_childcare, by = c("county_name", "study_year"))
@@ -366,7 +374,7 @@ ca_childcare <- ca_childcare |>
 
 ```{r}
 #| label: wd-6-semi
-#LAB 5
+#LAB 5, semi_join members checked in on date
 
 gym_members_checked_in <- get_fit_now_member |>
   semi_join(
@@ -380,7 +388,7 @@ gym_members_checked_in <- get_fit_now_member |>
 
 ```{r}
 #| label: wd-6-anti
-#LAB 5
+#LAB 5, anti join members who did not check in on jan 9 2018
 
 gym_members_not_checked_in <- get_fit_now_member |>
   anti_join(
@@ -449,7 +457,7 @@ The following assignments satisfy the above criteria:
 
 ```{r}
 #| label: r-2-1
-# Lab 1 Q6 — two boxplots with clear labels and tidy code
+# Lab 1 Q6 
 library(tidyverse)
 
 ggplot(data = ToothGrowth, mapping = aes(x = supp, y = len)) +
@@ -468,7 +476,7 @@ ToothGrowth |>
 
 ```{r}
 #| label: r-2-2
-# Lab 3 Q5 — clean and focus variables for downstream analysis
+# Lab 3 Q5
 teacher_evals_clean <- teacher_evals |>
   rename(sex = gender) |>
   filter(no_participants >= 10) |>
@@ -547,7 +555,7 @@ theme(axis.text.x = element_text(angle = 45))
 ```{r}
 #| label: dvs-2-cat
 
-#Lab 3 Q2
+#Lab 3 Challenge 2
 library(ggplot2)
 
 ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
@@ -839,6 +847,8 @@ teacher_evals_clean |>
 ```{r}
 #| label: dvs-6-ex-3
 
+#LAB 4 Q5
+
 mhi_by_region |>
   arrange(desc(`2018`))
 ```
@@ -1049,7 +1059,7 @@ summary(species_mod)
 ```{r}
 #| label: dsm-2-2
 
-#Challenge 3
+#Lab 3 Challenge 3
 table <- table(teacher_evals_compare$set_level, teacher_evals_compare$sen_level)
 chisq_result <- chisq.test(table)
 chisq_result
