@@ -232,7 +232,7 @@ region,
 
 ```{r}
 #| label: wd-4-factor-ex-2
-# Lab 4 · Q7 — tidy to long + relabel/relevel
+# Lab 4 Q7
 plot_data <- ca_childcare |>
   select(region, study_year, mc_infant, mc_toddler, mc_preschool) |>
   pivot_longer(
@@ -333,7 +333,7 @@ tax_enriched <- tax_rev |>
 
 ```{r}
 #| label: wd-5-inner-ex-1
-# Lab 4 · Q2
+# Lab 4 Q2
 ca_childcare <- counties |>
   filter(state_abbreviation == "CA") |>
   inner_join(
@@ -347,7 +347,7 @@ ca_childcare <- counties |>
 
 ```{r}
 #| label: wd-5-left-ex-1
-# Lab 4 · Q3
+# Lab 4 Q3
 ca_childcare <- ca_childcare |>
   left_join(
     tax_rev |>
@@ -570,7 +570,7 @@ plot.title = element_text(hjust = 0.5, face = "bold")
 
 ```{r}
 #| label: dvs-1-date
-# Lab 4 · Q7
+# Lab 4 Q7
 ggplot(plot_data, aes(x = study_year, y = price_weekly, color = region)) +
   geom_point(alpha = 0.5, size = 1.5) +
   geom_smooth(method = "loess", se = FALSE, linewidth = 1) +
@@ -591,7 +591,7 @@ ggplot(plot_data, aes(x = study_year, y = price_weekly, color = region)) +
 
 ```{r}
 #| label: dvs-2-ex-1
-# Lab 3 · Challenge 2
+# Lab 3 Challenge 2
 ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
   geom_bar(position = "fill") +
   labs(
@@ -613,7 +613,7 @@ ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
 
 ```{r}
 #| label: dvs-2-ex-2
-# Lab 2 · Q10–15
+# Lab 2 Q10–15
 ggplot(surveys, aes(x = species, y = weight)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(alpha = 0.4) +
@@ -680,7 +680,7 @@ plot.title = element_text(hjust = 0.5, face = "bold")
 
 ```{r}
 #| label: dvs-3-1-ex-1
-# Lab 3 · Challenge 2
+# Lab 3 Challenge 2
 ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
   geom_bar(position = "fill") + 
   scale_fill_manual(values = c("excellent" = "#9834eb", "standard" = "#d46c22")) +
@@ -707,8 +707,7 @@ ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
 
 ```{r}
 #| label: dvs-3-3
-#| label: dvs-3-3
-# Lab 4 · Q7
+# Lab 4 Q7
 ggplot(plot_data, aes(x = study_year, y = price_weekly, color = region)) +
   geom_point(alpha = 0.5, size = 1.5) +
   geom_smooth(method = "loess", se = FALSE, linewidth = 1) +
@@ -744,7 +743,7 @@ mhi_by_region
 
 ```{r}
 #| label: dvs-4-across
-# Lab 3 · Q10
+# Lab 3 Q10
 q1_by_course <- teacher_evals_clean |>
   filter(question_no == 901) |>
   group_by(teacher_id, course_id) |>
@@ -768,7 +767,7 @@ q1_stats
 
 ```{r}
 #| label: dvs-5-1
-# Lab 3 · Q10
+# Lab 3 Q10
 q1_by_course <- teacher_evals_clean |>
   filter(question_no == 901) |>
   group_by(teacher_id, course_id) |>
@@ -790,7 +789,7 @@ q1_stats
 
 ```{r}
 #| label: dvs-5-2
-# Lab 4 · Q6
+# Lab 4 Q6
 region_infant_2018 <- ca_childcare |>
   filter(study_year == 2018) |>
   group_by(region) |>
@@ -814,7 +813,7 @@ region_income_min_2018
 
 ```{r}
 #| label: dvs-6-ex-1
-# Lab 4 · Q5
+# Lab 4 Q5
 mhi_by_region |>
   rename(
     mhi_2008 = `2008`,
@@ -867,7 +866,7 @@ mhi_by_region |>
 
 ```{r}
 #| label: pe-1-one-call
-# Lab 4 · Q2
+# Lab 4 Q2
 ca_childcare <- counties |>
   filter(state_abbreviation == "CA") |>
   inner_join(
@@ -881,7 +880,7 @@ ca_childcare <- counties |>
 
 ```{r}
 #| label: pe-1-across
-# Lab 4 · Q7
+# Lab 4 Q7
 plot_data <- ca_childcare |>
   select(region, study_year, mc_infant, mc_toddler, mc_preschool) |>
   pivot_longer(
@@ -1006,7 +1005,7 @@ facet_wrap(~ age_group, nrow = 1)
 
 ```{r}
 #| label: pe-4-2
-# Lab 4 · Q7
+# Lab 4 Q7
 ggplot(plot_data, aes(x = study_year, y = price_weekly, color = region)) +
   geom_point(alpha = 0.5, size = 1.5) +
   geom_smooth(method = "loess", se = FALSE, linewidth = 1) +
