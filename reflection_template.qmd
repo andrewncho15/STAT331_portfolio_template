@@ -1019,14 +1019,22 @@ chisq_result
 
 <!-- How did you revise your thinking throughout the course? How did you revise your thinking on the code examples you have provided in your portfolio? -->
 
+Throughout the course, I found myself revising my thinking on certain topics, particularly Joins. As I understood more about Joins, I realized that they have a close relationship with filters (specifically anti joins) and there could be times when they can be used interchangeably. While creating this portfolio, I made a few edits to my existing code in order for it to more closely demonstrate the learning target.
+
 <!-- For the revisions included in your Portfolio, to help me understand the nature of your revisions, please denote somehow the feedback I provided you (e.g., boldface, italics, colored text) before your revisions. -->
 
 ## Extending My Thinking
 
 <!-- How did you extended your thinking throughout the course? How did you extend your thinking on the code examples you have provided in your portfolio? -->
 
+So far throughout the course, I have extended my thinking on certain topics by seeking help from my classmates and utilizing websites and forums online that provided me extra help when needed. In creating this portfolio, I used some of the information that I obtained through the internet and classmates to increase code efficiency, make my code tidier, and find proper solutions to questions which I struggled with.
+
 ## Peer Support & Collaboration
 
 <!-- Include an image or a description of feedback you gave that you are proud of (either in a peer review or in Discord). -->
 
+I was particularly proud of a comment I left on Lab 4 code review where I was able to find a function in my peer's code that could have been replaced with a summarise() to increase their code's efficiency and it showed me that I had a good understanding of that specific function.
+
 <!-- Include a description of how you grew as a collaborator through the weekly pair programming activities.   -->
+
+The weekly programming activities were highly beneficial for my learning in this course because it allowed me to help my classmates and solidify my knowledge through teaching/helping them, and allowed me to get help on things that I did not understand completely. It was also highly beneficial that while helping each other, we could ask Dr T or class helpers to get even further assistance.
