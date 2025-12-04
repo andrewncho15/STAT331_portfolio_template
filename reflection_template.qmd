@@ -27,14 +27,11 @@ execute:
 -   `csv` Example 1
 
 ```{r}
-#| label: wd-1-csv-1
+#| label: wd-1-csv-1c
 
-# Lab 2 Q1
-#read_csv is loaded via tidyverse
+# Lab 5 – Import gym membership data
 
-library(tidyverse)  
-
-surveys <- read_csv("data/surveys.csv")
+gym_member <- read_csv("data/gym_member.csv")
 ```
 
 -   `csv` Example 2
@@ -53,6 +50,15 @@ teacher_evals <- read_csv("downloads/data/teacher_evals.csv")
 ```{r}
 #| label: wd-1-xlsx
 
+#PA 4
+
+library(readxl)
+military <- read_xlsx("gov_spending_per_capita.xlsx",
+                      sheet = "Share of Govt. spending",
+                      skip  = 7,
+                      n_max = 190,
+                      na = c(". .", "xxx", "..")
+                      )
 ```
 
 **WD-2: I can select necessary columns from a dataset.**
@@ -317,7 +323,8 @@ checkins_0109 <- get_fit_now_check_in |>
     check_in_date = ymd(as.character(check_in_date)),
     check_in_month = month(check_in_date, label = TRUE)
   ) |>
-  filter(check_in_date == ymd("2018-01-09"))
+  filter(check_in_date == ymd("2018-01-09")
+         )
 ```
 
 **WD-5: I can use mutating joins to combine multiple dataframes.**
@@ -336,7 +343,8 @@ county_name = entity_name,
 study_year = year
 )
 ca_childcare_with_tax <- ca_childcare |>
-left_join(tax_rev_clean, by = c("county_name", "study_year"))
+left_join(tax_rev_clean, by = c("county_name", "study_year")
+          )
 ```
 
 -   `right_join()` Example 1
@@ -559,6 +567,13 @@ condition_index(150, 20)
 ```{r}
 #| label: r-3-example
 
+# Lab 2: Filtering invalid inputs to prevent errors
+
+surveys_filtered <- surveys |>
+  filter(weight > 0, hindfoot_length > 0) |>
+  filter(weight <= 65)
+
+surveys_filtered
 ```
 
 -   Example (function stops)
@@ -613,9 +628,6 @@ theme(axis.text.x = element_text(angle = 45))
 
 #Lab 3 Challenge 2
 #EDIT: added a percent scale on y-axis for proportions
-
-library(ggplot2)
-library(scales)
 
 ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
 geom_bar(position = "fill") +
@@ -1129,32 +1141,82 @@ missing_by_var
 
 -   using functions from the `map()` family
 
-```{r}
-#| label: pe-1-map-1
+```{#| label: pe-1-map-1}
 
+# Lab 10 – using map_int() to repeat a simulation 10,000 times
+
+set.seed(123)
+results <- map_int(.x = 1:10000,
+                   .f = ~ randomBabies(4)
+                   )
 ```
 
 **PE-2: I can write functions to reduce repetition in my code.**
 
 -   Example 1: Function that operates on vectors
 
-```{r}
-#| label: pe-2-1
+```{#| label: pe-2-1}
 
+# Challenge 7 – function operating on a numeric vector
+
+replace_outside <- function(x, min_val, max_val) {
+  ifelse(
+    test = !between(x, min_val, max_val),
+    yes  = NA,
+    no   = x
+  )
+}
 ```
 
 -   Example 2: Function that operates on data frames
 
-```{r}
-#| label: pe-2-2
+```{#| label: pe-2-2}
 
+# Lab 8 – function operating on a data frame
+
+pivot_table <- function(df, row, col) {
+  df |>
+    drop_na({{ row }}, {{ col }}) |>
+    count({{ row }}, {{ col }}) |>
+    pivot_wider(
+      names_from  = {{ col }},
+      values_from = n,
+      values_fill = 0
+    ) |>
+    arrange({{ row }})
+}
 ```
 
 -   Example 3: Function that operates on vectors *or* data frames
 
-```{r}
-#| label: pe-2-3
+```{#| label: pe-2-3}
 
+# Lab 7 – rescale_01(), a vector function that can be used directly or inside mutate() on data frame columns
+
+rescale_01 <- function(x) {
+  stopifnot(is.numeric(x))
+  stopifnot(length(x) > 1)
+
+  rng  <- range(x, na.rm = TRUE, finite = TRUE)
+  span <- rng[2] - rng[1]
+
+  if (span == 0) {
+    return(
+      case_when(
+        is.na(x)     ~ NA,
+        is.finite(x) ~ 0,
+        TRUE         ~ NA
+      )
+    )
+  }
+
+  case_when(
+    is.na(x)     ~ NA,
+    x == -Inf    ~ 0,
+    x ==  Inf    ~ 1,
+    is.finite(x) ~ (x - rng[1]) / span
+  )
+}
 ```
 
 **PE-3: I can use iteration to reduce repetition in my code.**
@@ -1193,9 +1255,14 @@ head(results)
 
 -   using a `map()` function with **more than one** input (e.g., `map_2()` or `pmap()`)
 
-```{r}
-#| label: pe-3-map-2
+```{#| label: pe-3-map-2}
 
+# copied from Lab 10: vectors estimate and conf.low used together
+
+estimates  <- ci_results$estimate
+lower_vals <- ci_results$conf.low
+
+map2_dbl(estimates, lower_vals, ~ .x - .y)
 ```
 
 **PE-4: I can use modern tools when carrying out my analysis.**
