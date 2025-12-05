@@ -29,7 +29,7 @@ execute:
 ```{r}
 #| label: wd-1-csv-1c
 
-# Lab 5 – Import gym membership data
+# Lab 5: Import gym membership data
 
 gym_member <- read_csv("data/gym_member.csv")
 ```
@@ -39,7 +39,7 @@ gym_member <- read_csv("data/gym_member.csv")
 ```{r}
 #| label: wd-1-csv-2
 
-# Lab 3 Q2
+# Lab 3: Q2
 #EDIT: removed here and used read_csv
 
 teacher_evals <- read_csv("downloads/data/teacher_evals.csv")
@@ -88,11 +88,10 @@ glimpse(teacher_evals_clean)
 ```{r}
 #| label: wd-2-ex-2
 
-#Lab 5, witness interviews
+# Lab 3: removing columns explicitly
 
-witness_interviews <- interview |>
-  inner_join(witnesses, by = c("person_id" = "id")) |>
-  select(name, transcript)
+teacher_evals_small <- teacher_evals |>
+  select(-dept, -division)
 ```
 
 -   Example selecting columns based on logical values (e.g., `starts_with()`, `ends_with()`, `contains()`, `where()`)
@@ -106,7 +105,7 @@ witness_interviews <- interview |>
   select(
     region, 
     study_year, 
-    starts_with("mc_") #Added starts_with
+    starts_with("mc_")
   ) |>
   pivot_longer(
     cols      = starts_with("mc_"),
@@ -408,7 +407,7 @@ ca_childcare <- counties |>
 #| label: wd-5-inner-ex-2
 
 # Lab 5: get witness interview transcripts w/ names
-#EDIT: second inner_join used for linking people & interviews
+#EDIT: fixed inner_join used for linking people & interviews
 
 witness_interviews <- interview |>
   inner_join(person |> select(id, name), by = 
