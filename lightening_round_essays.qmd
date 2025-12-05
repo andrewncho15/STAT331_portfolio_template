@@ -24,4 +24,4 @@ editor: visual
 
 5.  Give one piece of advice to a student just beginning a quarter of STAT 331 that will help them be successful in learning.
 
-    My advice to a student just beginning a quarter of STAT 331 would be to ask questions when they get lost and don't get stuck on one problem for too long, always find help!
+    My advice to a student just beginning a quarter of STAT 331 would be to ask questions when they get lost and don't get stuck on one problem for too long; always ask for help.

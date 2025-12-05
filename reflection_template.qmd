@@ -587,7 +587,6 @@ rescale_01 <- function(x) {
   stopifnot(length(x) > 1)
   rng  <- range(x, na.rm = TRUE, finite = TRUE)
   span <- rng[2] - rng[1]
-
   if (span == 0) {
     return(
       case_when(
@@ -597,7 +596,6 @@ rescale_01 <- function(x) {
       )
     )
   }
-
   case_when(
     is.na(x)     ~ NA,
     x == -Inf    ~ 0,
