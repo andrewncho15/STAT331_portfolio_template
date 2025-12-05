@@ -580,6 +580,31 @@ surveys_filtered
 ```{r}
 #| label: r-3-function-stops
 
+#Lab 7
+
+rescale_01 <- function(x) {
+  stopifnot(is.numeric(x))
+  stopifnot(length(x) > 1)
+  rng  <- range(x, na.rm = TRUE, finite = TRUE)
+  span <- rng[2] - rng[1]
+
+  if (span == 0) {
+    return(
+      case_when(
+        is.na(x)     ~ NA,
+        is.finite(x) ~ 0,
+        TRUE         ~ NA
+      )
+    )
+  }
+
+  case_when(
+    is.na(x)     ~ NA,
+    x == -Inf    ~ 0,
+    x ==  Inf    ~ 1,
+    is.finite(x) ~ (x - rng[1]) / span
+  )
+}
 ```
 
 ## Data Visualization & Summarization
@@ -1190,7 +1215,7 @@ pivot_table <- function(df, row, col) {
 
 ```{#| label: pe-2-3}
 
-# Lab 7 – rescale_01(), a vector function that can be used directly or inside mutate() on data frame columns
+# Lab 7
 
 rescale_01 <- function(x) {
   stopifnot(is.numeric(x))

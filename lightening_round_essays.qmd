@@ -6,16 +6,22 @@ editor: visual
 
 **Answer each of the following questions with *one sentence* including a brief explanation.**
 
-1. Finish the sentence with another student’s name: "If [Name of Student] doesn’t earn an A, then nobody should, because..." Explain your choice and your reasoning.
+1.  Finish the sentence with another student’s name: "If \[Name of Student\] doesn’t earn an A, then nobody should, because..." Explain your choice and your reasoning.
 
+    If Tyler does not receive an A then nobody should because he was always available to help me when I had questions and had a really good understanding of topics discussed in this course.
 
-2. What was the most difficult part of the class for you? List a general topic, a specific problem, a kind of work we did, etc. and explain why.
+2.  What was the most difficult part of the class for you? List a general topic, a specific problem, a kind of work we did, etc. and explain why.
 
+    The most difficult part of the class for me was the weekly labs because there were some times when I felt lost and it could take me a long time to figure out a solution even when asking peers.
 
-3. What was the easiest part of the class for you? Explain why.
+3.  What was the easiest part of the class for you? Explain why.
 
+    I think the in class practice assignments were easy for me because I really liked working with my peers and having a partner to work with allowed us to get the work done quickly and come up with efficient and effective solutions without as much struggle.
 
-4. What part of the class surprised or interested you the most? Explain why.
+4.  What part of the class surprised or interested you the most? Explain why.
 
+    I was surprised by how hands on this class was because my experiences in previous coding classes have been a lot more detached from the professors and the work we were given.
 
-5. Give one piece of advice to a student just beginning a quarter of STAT 331 that will help them be successful in learning.
+5.  Give one piece of advice to a student just beginning a quarter of STAT 331 that will help them be successful in learning.
+
+    My advice to a student just beginning a quarter of STAT 331 would be to ask questions when they get lost and don't get stuck on one problem for too long, always find help!
