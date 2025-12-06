@@ -50,7 +50,7 @@ teacher_evals <- read_csv("downloads/data/teacher_evals.csv")
 ```{r}
 #| label: wd-1-xlsx
 
-#PA 4
+#PA 4: read xlsx data
 
 library(readxl)
 military <- read_xlsx("gov_spending_per_capita.xlsx",
@@ -88,7 +88,7 @@ glimpse(teacher_evals_clean)
 ```{r}
 #| label: wd-2-ex-2
 
-# Lab 3: removing columns explicitly
+# Lab 3 Q5
 
 teacher_evals_small <- teacher_evals |>
   select(-dept, -division)
@@ -192,7 +192,7 @@ checkins_0109 <- get_fit_now_check_in |>
 ```{r}
 #| label: wd-4-numeric-ex-1
 
-# Lab 10: random babies sim
+# Lab 10 Q3: random babies sim
 # EDIT: use mutate() to create numeric var
 
 prop_table <- tibble(correct = results) |>
@@ -510,7 +510,7 @@ The following assignments satisfy the above criteria:
 ```{r}
 #| label: r-2-1
 
-# Lab 2: scatterplot of weight vs hindfoot length
+# Lab 2 Q4: scatterplot of weight vs hindfoot length
 
 ggplot(
   data = surveys,
@@ -550,7 +550,7 @@ glimpse(teacher_evals_clean
 ```{r}
 #| label: r-2-3
 
-#Lab 7
+#Lab 7 Q4
 #EDIT: formatted the function properly
 
 condition_index <- function(weight_g, length_cm) {
@@ -580,7 +580,7 @@ surveys_filtered
 ```{r}
 #| label: r-3-function-stops
 
-#Lab 7
+#Lab 7 Q4
 
 rescale_01 <- function(x) {
   stopifnot(is.numeric(x))
@@ -772,7 +772,7 @@ ToothGrowth |>
 ```{r}
 #| label: dvs-2-ex-4
 
-#Lab 2
+#Lab 2 Q10-15
 #EDIT: improved text readability and orientation
 
 library(ggplot2)
@@ -843,7 +843,7 @@ ggplot(teacher_evals_compare, aes(x = sen_level, fill = set_level)) +
 ```{r}
 #| label: dvs-3-1-ex-2
 
-#Lab 2
+#Lab 2 Q10-15
 #EDIT: added a manually defined color palette 
 
 library(ggplot2)
@@ -869,7 +869,7 @@ fill = "Species"
 ```{r}
 #| label: dvs-3-2
 
-# Lab 10 – proportion of correct baby matches.
+# Lab 10 Q3: proportion of correct baby matches
 #EDIT: added text annotations by using geom_text
 
 prop_table <- tibble(correct = results) |>
@@ -1024,7 +1024,7 @@ region_income_min_2018
 ```{r}
 #| label: dvs-6-ex-1
 
-# Lab 4 – median household income table.
+# Lab 4: median household income table
 #EDIT: Renamed columns to communicate data more clearly
 
 mhi_by_region |>
@@ -1039,7 +1039,7 @@ median_income_2018 = mhi_2018
 ```{r}
 #| label: dvs-6-ex-2
 
-# Lab 9 – demographics of professors table.
+# Lab 9: demographics of professors table.
 #EDIT: changed summary into formatted table with bold headers
 
 teacher_evals |>
@@ -1150,7 +1150,7 @@ factor(county_name),
 ```{r}
 #| label: pe-1-across
 
-# Lab 7: counting missing values for every column at once.
+# Lab 7: counting missing values for every column
 #EDIT: concise code using summarize instead of repeating calls
 
 missing_by_var <- fish |>
@@ -1165,7 +1165,7 @@ missing_by_var
 
 ```{#| label: pe-1-map-1}
 
-# Lab 10 – using map_int() to repeat a simulation 10,000 times
+# Lab 10: map_int() to repeat sim 10,000 times
 
 set.seed(123)
 results <- map_int(.x = 1:10000,
@@ -1179,7 +1179,7 @@ results <- map_int(.x = 1:10000,
 
 ```{#| label: pe-2-1}
 
-# Challenge 7 – function operating on a numeric vector
+# Challenge 7 Q3: function operating on a numeric vector
 
 replace_outside <- function(x, min_val, max_val) {
   ifelse(
@@ -1194,7 +1194,7 @@ replace_outside <- function(x, min_val, max_val) {
 
 ```{#| label: pe-2-2}
 
-# Lab 8 – function operating on a data frame
+# Lab 8: function operating on a data frame
 
 pivot_table <- function(df, row, col) {
   df |>
@@ -1213,7 +1213,7 @@ pivot_table <- function(df, row, col) {
 
 ```{#| label: pe-2-3}
 
-# Lab 7
+# Lab 7 Q4
 
 rescale_01 <- function(x) {
   stopifnot(is.numeric(x))
@@ -1264,7 +1264,7 @@ numeric_means
 ```{r}
 #| label: pe-3-map-1
 
-# Lab 10: running the random babies simulation 10000 times.
+# Lab 10: running the random babies simulation 10000 times
 #EDIT: map_int() used with one input to do sim several times
 
 set.seed(123)
@@ -1279,7 +1279,7 @@ head(results)
 
 ```{#| label: pe-3-map-2}
 
-# copied from Lab 10: vectors estimate and conf.low used together
+#Lab 10: vectors estimate and conf.low used together
 
 estimates  <- ci_results$estimate
 lower_vals <- ci_results$conf.low
