@@ -473,7 +473,7 @@ plot_data <- ca_childcare |>
 #| label: wd-7-wide
 
 # Lab 4 Q5
-#EDIT: clearer column names both before and after pivot
+#EDIT: clearer column names before and after pivot
 
 mhi_by_region <- ca_childcare |>
   filter(study_year %in% c(2008, 2018)) |>
